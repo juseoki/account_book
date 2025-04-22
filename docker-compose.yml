@@ -1,0 +1,30 @@
+#version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: gajebook-backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - gajebook-net
+
+  frontend:
+    build: ./client
+    container_name: gajebook-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - gajebook-net
+    depends_on:
+      - backend
+
+networks:
+  gajebook-net:
+    driver: bridge
