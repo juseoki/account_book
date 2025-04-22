@@ -3,28 +3,28 @@
 services:
   backend:
     build: ./backend
-    container_name: gajebook-backend
+    container_name: accountbook-backend
     ports:
       - "3000:3000"
     volumes:
       - ./backend:/app
       - /app/node_modules
     networks:
-      - gajebook-net
+      - accountbook-net
 
   frontend:
     build: ./client
-    container_name: gajebook-frontend
+    container_name: accountbook-frontend
     ports:
       - "5173:5173"
     volumes:
       - ./client:/app
       - /app/node_modules
     networks:
-      - gajebook-net
+      - accountbook-net
     depends_on:
       - backend
 
 networks:
-  gajebook-net:
+  accountbook-net:
     driver: bridge
